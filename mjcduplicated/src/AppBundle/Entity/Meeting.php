@@ -7,12 +7,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Event
+ * Meeting
  *
- * @ORM\Table(name="event")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\EventRepository")
+ * @ORM\Table(name="meeting")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\MeetingRepository")
  */
-class Event
+class Meeting
 {
     /**
      * @var int
@@ -54,7 +54,7 @@ class Event
      *
      * @param string $name
      *
-     * @return Event
+     * @return Meeting
      */
     public function setName($name)
     {
@@ -78,7 +78,7 @@ class Event
      *
      * @param \DateTime $date
      *
-     * @return Event
+     * @return Meeting
      */
     public function setDate($date)
     {

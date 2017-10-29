@@ -10,4 +10,36 @@ namespace AppBundle\Repository;
  */
 class SubscriptionRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function showAllAction()
+  {
+    $query = $this->getEntityManager()->createQuery(
+        'SELECT s FROM AppBundle:Subscription s ORDER BY s.subscriptionAt DESC'
+    );
+    return $query->getResult();
+  }
+ // Fonction pour récuperer les insciptions pour un prof via son id à terminer ???? Voir la pertinence de la requête
+//    public function showSubscriptionByTeacherId($id)
+  public function showMyStudentsAction($id)
+      {
+        $query = $this->createQueryBuilder('s')
+        ->select('s')
+        ->where('s.teacher = ?1')
+        ->setParameter(1, $id)
+        ->getQuery()->getResult();
+        return $query;
+    }
+
+    //Un étudiant doit avoir accès à toutes ses inscriptions pour pouvoir ensuite voir les observations liées
+    public function showMySubscriptions($id)
+    {
+        $query = $this->createQueryBuilder('s')
+        ->select('s')
+        ->where('s.student = ?1')
+        ->setParameter(1, $id)
+        ->getQuery()->getResult();
+        return $query;
+
+    }
+
+
 }
