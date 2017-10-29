@@ -63,4 +63,3 @@ class Specialty
         return $this->name;
     }
 }
-
