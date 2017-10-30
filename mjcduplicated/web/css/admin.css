@@ -1,0 +1,201 @@
+body {
+    margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
+}
+
+body header {
+    width: 90%;
+    margin: auto;
+    font-family: 'Oswald', sans-serif;
+}
+.btn-new {
+	background-color: #78d16f;
+
+}
+
+.btn-delete {
+		float: right;
+
+	background-color: #c86c6c;
+}
+
+.admin .btn {
+	display: inline-block;
+	/*font-weight: bold;*/
+	color : #012245;
+	text-transform: uppercase;
+}
+
+.info {
+    padding-bottom: 4em;
+    padding-left: 0;
+}
+
+.image img {
+    max-width: 100%;
+    transform: rotate(-5deg);
+    margin-top: : -10em;
+    box-shadow: 10px 4px 10px 1px rgba(0, 0, 0, 0.7);
+}
+
+.image {
+    margin-top: -4em;
+}
+
+.admin .container .presentation {
+    padding-top: 10em;
+}
+
+.presentation h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Oswald', sans-serif;
+}
+
+.presentation h2 {
+    font-weight: bold;
+    margin: 0;
+}
+
+.presentation p {
+    font-size: 1.2em;
+    margin-bottom: 0.8em;
+}
+
+.presentation strong {
+    font-weight: bold;
+}
+
+.prix {
+    margin-top: 2em;
+}
+
+.prix p {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.prix a {
+    color: #3fa535;
+    font-weight: bold;
+}
+
+.admin {
+    width: 90%;
+    font-family: 'Hind Madurai', sans-serif;
+    margin: 0 auto;
+    padding: 2em 0;
+}
+
+.admin a {
+    display: inline-block;
+    margin: 0.5em 0;
+}
+.admin table {
+	width : 100%;
+}
+.admin td>a {
+    /*display: inline-block;*/
+    margin-top: 0;
+    margin-right: 0.3em;
+}
+
+.admin h2 {
+    font-size: 1.5em;
+    margin: 0.5em 0;
+}
+
+.admin span.label.label-default.btn-lg {
+    background-color: #130505;
+}
+
+.admin .btn-primary {
+    background-color: #508dca;
+}
+
+.admin .btn-primary:hover {
+    background-color: #2d5e90;
+}
+
+.admin input, label {
+    font-size: 1.2em;
+    /*width: 150px;*/
+    margin-bottom: 1em;
+}
+
+.admin .form-control:focus{
+border-color: #78d16f ;
+border-style: solid;
+}
+
+
+.admin input {
+    margin-right: 2em;
+}
+
+.admin .row {
+    margin-top: 4em;
+}
+
+.admin td {
+    width: 10%;
+    padding-left: 0.4em;
+}
+
+.admin tr {
+    border-bottom: 1px solid #000;
+}
+
+.admin th {
+    padding: 0.5em;
+    font-weight: bolder;
+}
+
+.admin li {
+    display: inline;
+}
+
+.admin h1 {
+    font-size: 3em;
+    /*font-weight: bold;*/
+    padding-bottom: 1em;
+}
+
+.list-group {
+    padding-left: 0;
+    margin-bottom: 20px;
+    width: 80%;
+    margin-left: 5%;
+}
+.list-group li {
+    display:block;
+}
+.test {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.admin h3 {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+#observations td{
+	padding: 0.7em 0;
+}
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+	padding: 0 1% 1%;
+}
