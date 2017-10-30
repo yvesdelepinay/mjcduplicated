@@ -3,14 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * User
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -21,10 +22,11 @@ class User
      */
     private $id;
 
-    /**
+        /**
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=25, unique=true)
+     * @Assert\NotBlank()
      */
     private $username;
 
@@ -32,6 +34,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $firstname;
 
@@ -39,6 +42,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $lastname;
 
@@ -46,20 +50,22 @@ class User
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=60)
+     * @Assert\NotBlank()
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255)
+     * @ORM\Column(name="password", type="string")
+     * @Assert\NotBlank()
      */
     private $password;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthAt", type="datetimetz", nullable=true)
+     * @ORM\Column(name="birthAt", type="datetime", nullable=true)
      */
     private $birthAt;
 
@@ -67,6 +73,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="role", type="string", length=24)
+     * @Assert\NotBlank()
      */
     private $role;
 
@@ -78,6 +85,14 @@ class User
     private $isActive;
 
 
+
+
+    public function __construct()
+    {
+        $this->isActive = true;
+        // may not be needed, see section on salt below
+        // $this->salt = md5(uniqid(null, true));
+    }
     /**
      * Get id
      *
@@ -255,8 +270,7 @@ class User
     {
         return $this->role;
     }
-
-    /**
+        /**
      * Set isActive
      *
      * @param boolean $isActive
@@ -270,7 +284,7 @@ class User
         return $this;
     }
 
-    /**
+        /**
      * Get isActive
      *
      * @return bool
@@ -279,5 +293,116 @@ class User
     {
         return $this->isActive;
     }
-}
 
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+        public function getRoles()
+    {
+        return array($this->role);
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
+    }
+    public function __toString()
+    {
+        return $this->firstname.' '.$this->lastname;
+    }
+
+    /**
+     * Add notification
+     *
+     * @param \AppBundle\Entity\Notification $notification
+     *
+     * @return User
+     */
+    public function addNotification(\AppBundle\Entity\Notification $notification)
+    {
+        $this->notifications[] = $notification;
+
+        return $this;
+    }
+
+    /**
+     * Remove notification
+     *
+     * @param \AppBundle\Entity\Notification $notification
+     */
+    public function removeNotification(\AppBundle\Entity\Notification $notification)
+    {
+        $this->notifications->removeElement($notification);
+    }
+
+    /**
+     * Get notifications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
+    }
+
+    /**
+     * Add reading
+     *
+     * @param \AppBundle\Entity\Reading_notification $reading
+     *
+     * @return User
+     */
+    public function addReading(\AppBundle\Entity\Reading_notification $reading)
+    {
+        $this->readings[] = $reading;
+
+        return $this;
+    }
+
+    /**
+     * Remove reading
+     *
+     * @param \AppBundle\Entity\Reading_notification $reading
+     */
+    public function removeReading(\AppBundle\Entity\Reading_notification $reading)
+    {
+        $this->readings->removeElement($reading);
+    }
+
+    /**
+     * Get readings
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReadings()
+    {
+        return $this->readings;
+    }
+}
