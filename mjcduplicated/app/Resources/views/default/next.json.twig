@@ -1,0 +1,11 @@
+{
+  "nextDayActivities" : [
+  {% for item in result %}
+    {
+    "date" : "{{item.date | date('Y-m-d')}}",
+    "nbActivity" :{{item.nblesson}}
+    }
+    {% if (loop.length == loop.index ) or (loop.last == true)  %} {% else %},{% endif %}
+  {% endfor %}
+  ]
+}

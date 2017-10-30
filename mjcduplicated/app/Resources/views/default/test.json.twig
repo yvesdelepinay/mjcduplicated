@@ -1,0 +1,43 @@
+  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {
+    "user" :
+    {
+    "user_id" : {{ app.user.id  }},
+    "user_role" : "{{ app.user.role }}",
+    "user_firstname" : "{{app.user.firstname}}",
+    "user_lastname" : "{{app.user.lastname}}"
+    }
+    ,
+    "activities" : [
+      {% for lesson in lessons %}
+
+          {
+            "activity_id" : {{ lesson.id }},
+            "speciality" : "{{ lesson.subscription.specialties.name }}",
+            "startDate" : "{{ lesson.startAt | date("d-m-Y") }}",
+            "startHour" : "{{ lesson.subscription.startAt | date("H\\hi") }}",
+            "finishHour" : "{{ lesson.subscription.finishAt | date("H\\hi") }}",
+            "teacher" : "{{ lesson.subscription.teacher.firstname }} {{ lesson.subscription.teacher.lastname }}",
+            "teacher_id" : {{ lesson.subscription.teacher.id }},
+            "student" : "{{ lesson.subscription.student.firstname }} {{ lesson.subscription.student.lastname }}",
+            "student_id" : {{ lesson.subscription.student.id }},
+            "duration": "30 minutes",
+            "appreciation" : "{{lesson.appreciation}}",
+            {% if lesson.teacherIsPresent %}
+              "presenceTeacher" : true,
+            {% else %}
+              "presenceTeacher" : false,
+            {% endif %}
+            {% if lesson.studentIsPresent %}
+              "presenceStudent" : true
+            {% else %}
+              "presenceStudent" : false
+              {% endif %}
+          }
+          {% if (loop.length == loop.index ) or (loop.last == true)  %} {% else %},{% endif %}
+
+      {% endfor %}
+    {% endif %}
+
+  ]
+}

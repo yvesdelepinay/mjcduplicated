@@ -1,0 +1,41 @@
+{% extends 'base.html.twig'%}
+{% block body %}
+
+
+<div id="observations">
+	<h1 class="student"> {{student}} </h1>
+	<h2><span class="label label-default">  {{speciality|capitalize}}  avec {{teacher}} tous les {#result.0.startAt | localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc") #}
+	{% if (result.0.startAt |date('D')) == "Mon" %}
+	    lundis
+		{% elseif  (result.0.startAt |date('D')) == "Tue"%}
+		mardis
+		{% elseif  (result.0.startAt |date('D')) == "Wed"%}
+		mercredis
+		{% elseif  (result.0.startAt |date('D')) == "Thu"%}
+		jeudis
+		{% elseif  (result.0.startAt |date('D')) == "Fri"%}
+		vendredis
+	{% endif %}
+	 à
+{{result.0.startAt| date('H:i')}}</span></h2>
+
+{# Pour avoir la date entière en français à partir d'un dateTime #}
+{# "now"|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y") #}
+
+	<table>
+		<th>Date</th>
+		<th>Observations</th>
+		{% for item in result %}
+			<tr>
+				{% if date(item.startAt) <= date() %}
+				<td>{{  item.startAt | date('d/m/Y')}}</td>
+
+				{% if item.appreciation is defined %}
+					<td>{{item.appreciation|nl2br}}</td>
+			</tr>
+			{% endif %}
+				{% endif %}
+		{% endfor %}
+	</table>
+</div>
+{% endblock %}

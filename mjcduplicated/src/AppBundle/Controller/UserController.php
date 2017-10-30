@@ -5,12 +5,15 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * User controller.
  *
  * @Route("user")
+ * @Security("has_role('ROLE_ADMIN')")
  */
 class UserController extends Controller
 {
@@ -45,6 +48,18 @@ class UserController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            //J'appelle le service pour encoder
+            $encoder = $this->container->get('security.password_encoder');
+            //Je récupère le mot de passe de l'utilisateur à l'inscription
+            $password = $user->getPassword();
+            //J'encode le mot de passe
+            $encoded = $encoder->encodePassword($user, $password);
+            //Je fais l'update
+            $user->setPassword($encoded);
+            // dump($encoded);
+            // exit;
+            //J'enregistre en base de données
             $em->persist($user);
             $em->flush();
 
@@ -82,10 +97,22 @@ class UserController extends Controller
     public function editAction(Request $request, User $user)
     {
         $deleteForm = $this->createDeleteForm($user);
-        $editForm = $this->createForm('AppBundle\Form\UserType', $user);
+        $editForm = $this->createForm('AppBundle\Form\UserTypeEdit', $user);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+          if(!empty($editForm->getData()->getPassword())) {
+              // Si le mot de passe est modifié on le change
+              $encoder = $this->container->get('security.password_encoder');
+              $encoded = $encoder->encodePassword($user, $editForm->getData()->getPassword());
+              $user->setPassword($encoded);
+            }
+            else {
+              // Si le mot de passe n'est pas modifié, on l'indique spécifiquement
+              // sinon il sera vide
+              $user->setPassword($oldPassword);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_edit', array('id' => $user->getId()));

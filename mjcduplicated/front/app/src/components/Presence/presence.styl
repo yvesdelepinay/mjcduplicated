@@ -1,0 +1,73 @@
+/* Mobile First CSS */
+.presence
+  margin-top: .5em
+.activity-statut
+  display: inline-block
+
+.present
+  color: #2dbb1f
+
+.absent
+  color: red
+
+/* Mobile + */
+//@media (min-width: 400px)
+
+/* Phablets */
+@media (min-width: 550px)
+  .activity-statut
+    position: absolute
+    top: 9px
+    right: 10px
+  .activity-state .label
+    padding-top: 14px
+    border-radius: 3px
+    width: 60px
+    height: 40px
+    display: inline-block
+    border 1px solid #000
+    color: #000
+
+/* Tablettes */
+@media (min-width: 750px)
+  .presence
+    width: auto
+    display: inline-block
+    margin-top: 0em
+    &-button
+      position: absolute
+      top: 4.5px
+      right: 123px
+      & .button-bg
+        height: 24.5px
+        border-radius: 3px
+      & .button-switch
+        border-radius: 3px
+        height: 100%
+      & .button-in, .button-out
+        padding-top: 8px
+  .activity-statut
+    top: 5px
+  .activity-state .label
+    height: 25px
+    padding-top: 6px
+/* Desktop */
+@media (min-width: 1000px)
+  .presence
+
+  .present
+    color: #2dbb1f
+
+  .absent
+    color: red
+/* Desktop HD */
+@media (min-width: 1200px)
+  .presence
+    //border-left: 1px solid #35a550
+    //width: 180px
+    //float: right
+    //margin-top: 6px
+    //margin-right: .5em
+
+/* Desktop Wide */
+//@media (min-width: 1400px)

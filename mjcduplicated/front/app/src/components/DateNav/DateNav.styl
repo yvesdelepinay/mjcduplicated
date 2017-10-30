@@ -1,0 +1,60 @@
+@import 'datepicker.styl'
+@import "../var.styl"
+/* Mobile First CSS */
+#notebook-navigation
+  text-align: center
+  margin-top: 10em
+
+.date-picker
+  font-size: 1em;
+  text-align: center
+  border-radius: 4px;
+  box-shadow: inset 0 2px 2px #e9e9e9;
+  border: 1px solid #aeaeae;
+  line-height: 16px;
+  padding: 6px 10px 5px;
+  width: 150px
+
+.nav-arrow
+  background: none
+  border: none
+  font-size: 2em
+  transition: 1s
+  color: #78d16f
+  &:hover
+    color: #3fa535
+
+#left-arrow
+  float: left
+  margin-left: 1em
+  &:hover
+    transform: rotate(-360deg)
+
+#right-arrow
+  float: right
+  margin-right: 1em
+  &:hover
+    transform: rotate(360deg)
+
+#date-title
+  font-size: 2em
+  margin: 1em auto
+  text-transform: uppercase
+  font-family: font-title
+/* Mobile + */
+//@media (min-width: 400px)
+
+/* Phablets */
+//@media (min-width: 550px)
+
+/* Tablettes */
+//@media (min-width: 750px)
+/* Desktop */
+@media (min-width: 1000px)
+  #notebook-navigation-nav
+    margin: 2em 10em
+/* Desktop HD */
+//@media (min-width: 1200px)
+
+/* Desktop Wide */
+//@media (min-width: 1400px)

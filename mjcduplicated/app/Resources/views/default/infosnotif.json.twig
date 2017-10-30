@@ -1,0 +1,38 @@
+  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {
+    "user" :
+    {
+    "user_id" : {{ app.user.id  }},
+    "user_role" : "{{ app.user.role }}",
+    "user_firstname" : "{{app.user.firstname}}",
+    "user_lastname" : "{{app.user.lastname}}"
+    }
+    ,
+    "activities" : [
+          {
+            "activity_id" : {{ activity.id }},
+            "speciality" : "{{ activity.subscription.specialties.name }}",
+            "startDate" : "{{ activity.startAt | date("d-m-Y") }}",
+            "startHour" : "{{ activity.subscription.startAt | date("H\\hi") }}",
+            "finishHour" : "{{ activity.subscription.finishAt | date("H\\hi") }}",
+            "teacher" : "{{ activity.subscription.teacher.firstname }} {{ activity.subscription.teacher.lastname }}",
+            "teacher_id" : {{ activity.subscription.teacher.id }},
+            "student" : "{{ activity.subscription.student.firstname }} {{ activity.subscription.student.lastname }}",
+            "student_id" : {{ activity.subscription.student.id }},
+            "duration": {{ activity.subscription.duration }},
+            "appreciation" : "{{activity.appreciation}}",
+            {% if activity.teacherIsPresent %}
+              "presenceTeacher" : true,
+            {% else %}
+              "presenceTeacher" : false,
+            {% endif %}
+            {% if activity.studentIsPresent %}
+              "presenceStudent" : true
+            {% else %}
+              "presenceStudent" : false
+              {% endif %}
+          }
+    {% endif %}
+
+  ]
+}

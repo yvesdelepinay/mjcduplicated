@@ -6,11 +6,14 @@ use AppBundle\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * Event controller.
  *
  * @Route("event")
+ * @Security("has_role('ROLE_ADMIN')")
  */
 class EventController extends Controller
 {
@@ -19,6 +22,7 @@ class EventController extends Controller
      *
      * @Route("/", name="event_index")
      * @Method("GET")
+     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_TEACHER') or has_role('ROLE_STUDENT')")
      */
     public function indexAction()
     {
@@ -62,6 +66,7 @@ class EventController extends Controller
      *
      * @Route("/{id}", name="event_show")
      * @Method("GET")
+     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_TEACHER') or has_role('ROLE_STUDENT')")
      */
     public function showAction(Event $event)
     {

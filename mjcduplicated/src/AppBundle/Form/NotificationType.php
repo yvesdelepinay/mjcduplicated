@@ -13,7 +13,7 @@ class NotificationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('entityType')->add('idEntityType')->add('message')->add('createdAt')->add('specification')->add('notifier');
+        $builder->add('entityType')->add('idEntityType')->add('message')->add('createdAt')->add('specification')->add('userId');
     }
     
     /**

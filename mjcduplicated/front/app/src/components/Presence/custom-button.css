@@ -1,0 +1,50 @@
+/* BUTTON 1 */
+
+.one {
+  margin: auto .5em;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.2em;
+}
+.one .button-wrap {
+  width: 106px;
+  margin: auto;
+  cursor: pointer;
+  user-select: none;
+}
+.one .button-bg {
+  width: 100%;
+  height: 100%;
+  border: 0px solid #87db7f;
+  border-radius: 40px;
+  color:#000;
+  background: #87db7f;
+  transition:all 0.2s ease;
+  box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.5);
+}
+.one .button-switch {
+  position:relative;
+  left:0px;
+  width: 50%;
+  height: 20px;
+  border:solid 3px #5cb85c;
+  border-radius: 36px;
+  transition:all 0.2s ease;
+  background: #F1F1F1
+}
+.one .button-active .button-switch { left:53px; }
+.one .button-in,
+.one .button-out {
+  position:absolute;
+  transition:all 0.2s ease;
+  padding-top:7px;
+  font-size:0.6em;
+  text-transform:uppercase;
+  font-weight:bold;
+  z-index: 1
+}
+.one .button-in { margin-left:58px; }
+.one .button-out { margin-left:8px; color:#dd2222; }
+.one .button-active .button-out { color:#000; }
+.one .button-active .button-in { color:#3FA535; }
+.one .button-active .button-bg { background-color:#87db7f; }

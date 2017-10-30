@@ -1,0 +1,19 @@
+{
+  "notifications" : [
+  {% for item in result %}
+    {
+    "notification_id" : {{ item.id }},
+    "activity_type" : "{{ item.entityType }}",
+    "activity_id" : {{ item.idEntityType }},
+    "date" : "{{item.createdAt | date('Y-m-d')}}",
+    "message" : "{{ item.message }}",
+    {% if item.isRead %}
+      "is_read"  : true
+    {% else %}
+      "is_read" : false
+      {% endif %}
+    }
+    {% if (loop.length == loop.index ) or (loop.last == true)  %} {% else %},{% endif %}
+  {% endfor %}
+  ]
+}

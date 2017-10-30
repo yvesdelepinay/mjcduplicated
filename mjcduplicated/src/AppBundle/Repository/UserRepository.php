@@ -10,4 +10,21 @@ namespace AppBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+      public function showTeachers()
+      {
+        $query = $this->getEntityManager()->createQuery(
+            "SELECT u FROM AppBundle:User u
+            WHERE u.role = 'ROLE_TEACHER'"
+        );
+        return $query;
+      }
+
+      public function showStudents()
+      {
+          $query = $this->getEntityManager()->createQuery(
+              "SELECT u FROM AppBundle:User u
+              WHERE user.role = 'ROLE_STUDENT'"
+          );
+          return $query;
+      }
 }

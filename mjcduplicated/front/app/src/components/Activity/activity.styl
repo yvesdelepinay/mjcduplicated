@@ -1,0 +1,101 @@
+@import '../var.styl'
+/* Mobile First CSS */
+#activity-view
+  text-align: center
+  margin: 3em auto
+  background: rgba(255, 255, 255, 0.9)
+  padding: 1em
+  position: relative
+  border: 10px solid #1a661a
+  font-family: font-main
+  & p
+    margin: .5em
+  & .activity-statut
+    position: absolute
+    top:41px
+    right:15px
+    font-size: 1.1em
+  & .presence
+    float: right
+    width: auto
+    margin-top: -3em
+#observation
+  text-align: left
+  background: #78d16f
+  border-radius: 1em
+  padding: 1.5em
+  position: relative
+  &-submit
+    margin-top: -2px
+  &-label
+    margin-bottom: .5em
+    text-transform: uppercase
+    display: block
+    width: auto
+    &::first-letter
+      text-transform: uppercase
+  & textarea
+    width: 100%
+    border: 1px solid black
+    border-radius: 0
+    padding: .5em
+    margin: 0
+    resize: none
+  & button
+    background: #008000
+    border: none
+    color: #FFF
+    padding: 0
+    border-radius: 0 0 1em 1em
+    height: 32px
+    &:active
+      background: #2dbb1f
+      & i
+        background: #2dbb1f
+    & i
+      background: #1a661a
+      padding: .5em
+      border-radius: 0em 0em 0em 1em
+    & span
+      padding: .5em
+#activity-title
+  font-size: 1.5em
+  margin: 1em auto
+
+#infos-presence
+  text-align: left
+
+.agenda-home-link:hover
+  color:#9b35a5
+
+#appreciation
+  display: inline-block
+  width: auto
+  padding: .5em
+
+/* Mobile + */
+//@media (min-width: 400px)
+
+/* Phablets */
+@media (min-width: 550px)
+  #activity-view
+    & .activity-statut
+      top: 4px
+      right: 5px
+    & .presence-button
+      position: inherit
+/* Tablettes */
+//@media (min-width: 750px)
+
+/* Desktop */
+@media (min-width: 1000px)
+  #activity-view
+    border-radius: 3px
+    width: 900px
+    & .presence
+      border: none
+/* Desktop HD */
+//@media (min-width: 1200px)
+
+/* Desktop Wide */
+//@media (min-width: 1400px)

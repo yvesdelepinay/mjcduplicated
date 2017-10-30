@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+	<h1>Mes activités</h1>
+	<table>
+		<th>Professeur</th>
+		<th>Activité</th>
+		<th>Infos</th>
+
+
+		{% for subscription in subscriptions %}
+		{% set student = subscription.student.firstname ~' '~ subscription.student.lastname %}
+		{% set teacher = subscription.teacher.firstname ~' '~  subscription.teacher.lastname %}
+		{% set speciality = subscription.specialties.name %}
+		<tr>
+			<td><h2><span class="label label-default btn-lg">{{subscription.teacher.firstname}} {{subscription.teacher.lastname}}</span></h2></td>
+
+		<td>{{ subscription.specialties.name | capitalize}}</td>
+
+		<td><a href="{{path('all_observations', {'id':subscription.id, 'student':student, 'teacher':teacher, 'speciality':speciality})}}" class="btn btn-primary">Observations</a>
+
+	</tr>
+		{% endfor %}
+
+</table>
+{% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+{% block javascripts %}
+<script src="https://use.fontawesome.com/d21c915728.js"></script>
+<script src="{{asset('js/app.js')}}"></script>
+<script>require('src/index');</script>
+{% endblock %}

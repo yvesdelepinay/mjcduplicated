@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>{% block title %}LA FABRIQUE{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link href="https://fonts.googleapis.com/css?family=Hind+Madurai:400,700" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="icon" type="image/x-icon" href="{{ asset('fabrique.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('css/app.css')}}">
+        <link rel="stylesheet" href="{{ asset('css/admin.css')}}">
+    </head>
+    <body>
+      <header>
+		  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<div class="user btn btn-lg">
+			  <span class="glyphicon glyphicon-user disable  "></span>
+			{{ app.user.firstname }} {{ app.user.lastname }}
+		</div>
+		{% endif %}
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="true">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+			</button> <a href="{{ path('homepage') }}" class="navbar-brand">LA FABRIQUE</a>
+            </div>
+            <div class="collapse navbar-collapse menu nav-justified" id="bs-example-navbar-collapse-9">
+              <ul class="nav navbar-nav">
+                {# Pout tout le monde #}
+
+
+				{# Si l'user est admin #}
+				 {% if is_granted('ROLE_ADMIN') %}
+        <li><a href="{{ path('specialty_index')}}">Activités</a></li>
+        <li><a href="{{ path('event_index')}}">Evénements</a></li>
+        <li><a href="{{ path('lesson_index')}}">Leçons</a></li>
+				<li><a href="{{ path('user_index')}}">Utilisateurs</a></li>
+				<li><a href="{{ path('subscription_index')}}">Inscriptions</a></li>
+				<li><a href="{{path ('user_new')}}" alt="nouvel utilisateur" data-toggle="tooltip" title="créer un nouvel utilisateur"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a></li>
+				<li><a href="{{path ('subscription_new')}}" alt="nouvelle inscription" data-toggle="tooltip" title="créer une nouvelle inscription"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></a></li>
+
+				{% endif %}
+				{# Si l'user est teacher #}
+				 {% if is_granted('ROLE_TEACHER') %}
+				<li><a href="{{ path('show_myStudents')}}">Mes élèves</a></li>
+        <li><a href="{{ path('meeting_index')}}">Mes réunions</a></li>
+        <li><a href="{{ path('event_index')}}">Evénements</a></li>
+
+
+				{% endif %}
+				{# Si l'user est student #}
+				 {% if is_granted('ROLE_STUDENT') %}
+          <li><a href="{{ path('show_mySubscriptions')}}">Mes inscriptions</a></li>
+          <li><a href="{{ path('event_index')}}">Evénements</a></li>
+
+				{% endif %}
+                {# Si l'user est authentifié #}
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {# On ne donne pas pour l'instant à l'user la possibilité de modifier son profil,
+             seul l'admin peut le faire #}
+
+				<!-- <li><a href="
+        {# path('user_edit',  { 'id': app.user.id }) #}
+        "><span class="glyphicon glyphicon-wrench"></span> Modifier mon profil</a></li> -->
+                <li><a href="{{ path('logout')}}">Déconnexion</a></li>
+
+				{% else %}
+
+				<li><a href="{{ path('login')}}">Se connecter</a></li>
+				{% endif %}
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+        {% block body %}{% endblock %}
+		<script
+		  src="https://code.jquery.com/jquery-3.2.1.min.js"
+		  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+		  crossorigin="anonymous">
+		</script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+		</script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

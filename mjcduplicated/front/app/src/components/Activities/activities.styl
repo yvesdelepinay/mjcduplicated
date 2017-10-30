@@ -1,0 +1,90 @@
+/* Mobile First CSS */
+#activities
+  background: #3fa535
+  color: #000
+
+.activity
+  margin: .5em auto
+  padding: .5em
+  display: inline-block
+  background: #78d16f
+  width: 100%
+  position: relative
+  &:first-child
+    margin-top: 1em
+  &:last-child
+    margin-bottom: 1em
+  &-infos
+    display: inline-block
+    font-size: 0.9em
+    margin-left: 1em
+    & div
+      display: inline-block
+      vertical-align: middle
+  &-link
+    position: absolute
+    right: 5px
+    top: 12px
+    &:hover
+      color:#9b35a5
+
+.show-activity-button
+  background: none
+  border: none
+  border: 1px solid #000
+  font-size: .9em
+  margin-left: 1em
+  color: #000
+  height: 30px
+  width: 40px
+  &:hover
+    background: #2dbb1f
+    border-color: #2dbb1f
+    color: #FFF
+#no-activity-title
+  text-align: center
+  text-transform: uppercase
+  padding: 2em
+  font-family: font-title
+
+/* Mobile + */
+//@media (min-width: 400px)
+
+/* Phablets */
+@media (min-width: 550px)
+  .activity
+    &-infos
+      font-size: 1em
+    &-link
+      right: 80px
+      top: 9px
+  .show-activity-button
+    height: 40px
+/* Tablettes */
+@media (min-width: 750px)
+  .activity
+    height: 36px
+    &-infos
+      line-height: 1.5em
+    &-link
+      top: 5px
+  .show-activity-button
+    height: 25px
+/* Desktop */
+@media (min-width: 1000px)
+  #activities
+    //border-radius: 1em
+    margin: 2em auto
+    //width: 90%
+  .activity
+    &-hour
+      &:after
+        content: ' : '
+  .show-activity-button
+    margin: auto auto auto .5em
+/* Desktop HD */
+//@media (min-width: 1200px)
+
+
+/* Desktop Wide */
+//@media (min-width: 1400px)

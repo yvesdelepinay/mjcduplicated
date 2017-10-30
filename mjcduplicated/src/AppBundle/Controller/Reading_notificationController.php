@@ -5,12 +5,17 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Reading_notification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * Reading_notification controller.
  *
  * @Route("reading_notification")
+ * @Security("has_role('ROLE_TEACHER') or has_role('ROLE_STUDENT')")
  */
 class Reading_notificationController extends Controller
 {
@@ -133,4 +138,23 @@ class Reading_notificationController extends Controller
             ->getForm()
         ;
     }
+    /**
+           * @Route("/is_read/{id}", name="notification_is_read")
+           * @Security("has_role('ROLE_TEACHER') or has_role('ROLE_STUDENT')")
+
+           */
+           public function notificationIsReadAction(Request $request, Reading_notification $reading_notification)
+           {
+               $em = $this->getDoctrine()->getManager();
+               $reading_notification->setIsRead(true);
+               $em->flush();
+            //    dump($reading_notification);
+            //    exit;
+               return $this->render('default/read.json.twig', [
+                   'is_read' => $reading_notification,
+               ]
+            //    new JsonResponse()
+                 );
+           }
+
 }

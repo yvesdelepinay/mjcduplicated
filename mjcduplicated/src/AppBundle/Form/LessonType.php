@@ -13,9 +13,9 @@ class LessonType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('startAt')->add('teacherIsPresent')->add('studentIsPresent')->add('appreciation')->add('subscription');
+        $builder->add('startAt')->add('teacherIsPresent')->add('studentIsPresent')->add('appreciation');
     }
-    
+
     /**
      * {@inheritdoc}
      */
