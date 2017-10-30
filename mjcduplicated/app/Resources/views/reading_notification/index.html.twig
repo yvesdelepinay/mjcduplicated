@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Reading_notifications list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Isread</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reading_notification in reading_notifications %}
+            <tr>
+                <td><a href="{{ path('reading_notification_show', { 'id': reading_notification.id }) }}">{{ reading_notification.id }}</a></td>
+                <td>{% if reading_notification.isRead %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('reading_notification_show', { 'id': reading_notification.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('reading_notification_edit', { 'id': reading_notification.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('reading_notification_new') }}">Create a new reading_notification</a>
+        </li>
+    </ul>
+{% endblock %}

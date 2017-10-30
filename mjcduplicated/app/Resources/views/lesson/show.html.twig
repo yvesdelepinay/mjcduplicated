@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lesson</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ lesson.id }}</td>
+            </tr>
+            <tr>
+                <th>Startat</th>
+                <td>{% if lesson.startAt %}{{ lesson.startAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Teacherispresent</th>
+                <td>{% if lesson.teacherIsPresent %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Studentispresent</th>
+                <td>{% if lesson.studentIsPresent %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Appreciation</th>
+                <td>{{ lesson.appreciation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('lesson_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('lesson_edit', { 'id': lesson.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

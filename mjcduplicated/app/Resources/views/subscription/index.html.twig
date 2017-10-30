@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Subscriptions list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Startat</th>
+                <th>Finishat</th>
+                <th>Duration</th>
+                <th>Subscriptionat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for subscription in subscriptions %}
+            <tr>
+                <td><a href="{{ path('subscription_show', { 'id': subscription.id }) }}">{{ subscription.id }}</a></td>
+                <td>{% if subscription.startAt %}{{ subscription.startAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if subscription.finishAt %}{{ subscription.finishAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ subscription.duration }}</td>
+                <td>{% if subscription.subscriptionAt %}{{ subscription.subscriptionAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('subscription_show', { 'id': subscription.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('subscription_edit', { 'id': subscription.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('subscription_new') }}">Create a new subscription</a>
+        </li>
+    </ul>
+{% endblock %}

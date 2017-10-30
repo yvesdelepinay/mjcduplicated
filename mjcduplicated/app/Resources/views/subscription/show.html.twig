@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Subscription</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ subscription.id }}</td>
+            </tr>
+            <tr>
+                <th>Startat</th>
+                <td>{% if subscription.startAt %}{{ subscription.startAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Finishat</th>
+                <td>{% if subscription.finishAt %}{{ subscription.finishAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td>{{ subscription.duration }}</td>
+            </tr>
+            <tr>
+                <th>Subscriptionat</th>
+                <td>{% if subscription.subscriptionAt %}{{ subscription.subscriptionAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('subscription_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('subscription_edit', { 'id': subscription.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
